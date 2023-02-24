@@ -12,6 +12,10 @@ func main() {
 	// 初始化配置
 	bootstrap.InitializeConfig()
 
+	// 初始化日志
+	bootstrap.InitializeLog()
+	global.App.Log.Info("initialize log success")
+
 	r := gin.Default()
 
 	r.GET("/ping", func(c *gin.Context) {
