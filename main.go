@@ -16,6 +16,16 @@ func main() {
 	bootstrap.InitializeLog()
 	global.App.Log.Info("initialize log success")
 
+	// 初始化数据库
+	bootstrap.InitializeDB()
+	// 程序结束前关闭数据库链接
+	defer func() {
+		if global.App.DB != nil {
+			sqlDB, _ := global.App.DB.DB()
+			sqlDB.Close()
+		}
+	}()
+
 	r := gin.Default()
 
 	r.GET("/ping", func(c *gin.Context) {

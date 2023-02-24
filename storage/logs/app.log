@@ -1,2 +1,4 @@
-[2023-02-24 17:20:57.694]	local.info	backend-template/main.go:17	initialize log success
-[2023-02-24 17:23:52.964]	local.info	backend-template/main.go:17	initialize log success
+[2023-02-24 18:06:02.229]	local.info	backend-template/main.go:17	initialize log success
+[2023-02-24 18:06:02.273]	local.error	bootstrap/db.go:38	migrate table failed	{"err": "ERROR: syntax error at or near \"手机号\" (SQLSTATE 42601)"}
+[2023-02-24 18:06:48.441]	local.info	backend-template/main.go:17	initialize log success
+[2023-02-24 18:06:48.592]	local.error	bootstrap/db.go:38	migrate table failed	{"err": "ERROR: syntax error at or near \"创建时间\" (SQLSTATE 42601)"}
