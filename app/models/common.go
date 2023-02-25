@@ -1,5 +1,9 @@
 package models
 
+import (
+	"github.com/google/uuid"
+)
+
 // 自增ID主键
 type ID struct {
 	ID uint `json:"id" gorm:"primary_key"`
@@ -14,4 +18,10 @@ type Timestamps struct {
 // 软删除
 type SoftDelete struct {
 	DeletedAt int64 `json:"deleted_at" gorm:"comment:'删除时间'"`
+}
+
+type Model struct {
+	ID uuid.UUID `gorm:"type:uuid;primaryKey;default:gen_random_uuid()"`
+	// CreatedAt time.Time
+	// UpdatedAt time.Time
 }

@@ -32,7 +32,7 @@ func InitializeDB() *gorm.DB {
 // 数据库表初始化
 func initPostgresqlTables(db *gorm.DB) {
 	err := db.AutoMigrate(
-		models.User{},
+		&models.User{},
 	)
 	if err != nil {
 		global.App.Log.Error("migrate table failed", zap.Any("err", err))
@@ -47,10 +47,12 @@ func initPostgresqlGorm() *gorm.DB {
 		return nil
 	}
 
-	dsn := fmt.Sprintf("postgresql://%s:%s@%s:%d/%s?sslmode=disable", dbConfig.UserName, dbConfig.Password, dbConfig.Host, dbConfig.Port, dbConfig.Database)
+	// dsn := fmt.Sprintf("postgresql://%s:%s@%s:%d/%s?sslmode=disable", dbConfig.UserName, dbConfig.Password, dbConfig.Host, dbConfig.Port, dbConfig.Database)
+	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%d sslmode=disable TimeZone=Asia/Shanghai", dbConfig.Host, dbConfig.UserName, dbConfig.Password, dbConfig.Database, dbConfig.Port)
 
 	pgConfig := postgres.Config{
-		DSN: dsn,
+		DSN:                  dsn,
+		PreferSimpleProtocol: true,
 	}
 	if db, err := gorm.Open(postgres.New(pgConfig), &gorm.Config{
 		DisableForeignKeyConstraintWhenMigrating: true, // 禁用自动创建外键约束
